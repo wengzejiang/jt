@@ -14,14 +14,4 @@ public class IndexController {
 		return moduleName;
 	}
 
-	@RequestMapping("index")
-	public String index(){
-		return "index";
-	}
-
-	@RequestMapping("index2")
-	@ResponseBody
-	public String index2(){
-		return "haha";
-	}
 }
