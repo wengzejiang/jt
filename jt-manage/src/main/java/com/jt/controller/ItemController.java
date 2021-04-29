@@ -1,19 +1,20 @@
 package com.jt.controller;
 
 import com.jt.vo.EasyUITable;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jt.service.ItemService;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @ResponseBody
 @RequestMapping("/item")
+@Api(tags = "商品管理")
 public class ItemController {
 	
 	@Autowired
@@ -26,10 +27,19 @@ public class ItemController {
 	 *   返回值: EasyUITable对象
 	 */
 	@ApiOperation("查询商品")
-	@RequestMapping("/query")
-	public EasyUITable findItemByPage(@ApiParam(name = "页数",value = "page")Integer page,@ApiParam(name ="行数",value = "rows")Integer rows){
+	@RequestMapping(value="/query",method = RequestMethod.GET)
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "page",value = "页数", required = true,paramType = "query",dataType = "int"),
+			@ApiImplicitParam(name = "rows",value = "行数", required = true,paramType= "query",dataType = "int")
+	})
+	@ApiResponses({
+			@ApiResponse(code=400,message="请求参数错误")
+	})
+	public EasyUITable findItemByPage(Integer page,Integer rows){
 		return itemService.findItemByPage(page,rows);
 	}
+
+
 
 
 }

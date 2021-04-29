@@ -10,4 +10,6 @@ public interface ItemMapper extends BaseMapper<Item>{
 
     @Select("select * from tb_item order by updated desc limit #{start},#{rows}")
     List<Item> findItemByPage(int start, Integer rows);
+
+
 }
