@@ -1,6 +1,8 @@
 package com.jt.controller;
 
+import com.jt.pojo.Item;
 import com.jt.vo.EasyUITable;
+import com.jt.vo.SysResult;
 import io.swagger.annotations.*;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,21 @@ public class ItemController {
 	}
 
 
-
+	/**
+	 * 业务需求: 实现商品新增
+	 * 1.url:/item/save
+	 * 2.参数:$("#itemAddForm").serialize() 整个form表单数据
+	 * 3.返回值: SysResult对象
+	 */
+	@ApiOperation("新增商品")
+	@RequestMapping(value = "save",method = RequestMethod.POST)
+//	@ApiImplicitParams(
+//			@ApiImplicitParam(name="item",value="item对象",required = true,paramType= "query",dataType ="object")
+//	)
+	public SysResult saveItem(Item item){
+		System.out.println("item========="+item);
+		itemService.saveItem(item);
+		return SysResult.success();
+	}
 
 }

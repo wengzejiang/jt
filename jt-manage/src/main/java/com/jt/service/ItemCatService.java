@@ -1,5 +1,9 @@
 package com.jt.service;
 
+import com.jt.vo.EasyUITree;
+
+import java.util.List;
+
 /**
  * Package: com.jt.service
  * Description： TODO
@@ -11,4 +15,6 @@ package com.jt.service;
  */
 public interface ItemCatService {
     String findItemCatNameById(Long itemCatId);
+
+    List<EasyUITree> findItemCatListByParentId(Long parentId);
 }

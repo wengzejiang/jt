@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.jt.mapper.ItemMapper;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService {
-	
+
 	@Autowired
 	private ItemMapper itemMapper;
 
@@ -38,5 +39,13 @@ public class ItemServiceImpl implements ItemService {
 		long total=itemIPage.getTotal();
 		List<Item> itemList=itemIPage.getRecords();
 		return new EasyUITable(total,itemList);
+	}
+
+	@Override
+	public void saveItem(Item item) {
+		item.setStatus(1)
+				.setCreated(new Date())
+				.setUpdated(item.getCreated());//保证时间一致.
+		itemMapper.insert(item);
 	}
 }
